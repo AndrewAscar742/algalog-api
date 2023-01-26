@@ -1,7 +1,7 @@
 package br.com.sp.algalogapi.domain.model;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.OffsetDateTime;
 
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -13,15 +13,23 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import br.com.sp.algalogapi.api.dto.EntregaDto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter 
+@JsonInclude(value = Include.NON_NULL)
+@Getter
 @Setter
+@NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
 @Table(name = "entregas")
+
 public class Entrega {
 	@EqualsAndHashCode.Include
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,6 +46,14 @@ public class Entrega {
 	@Enumerated(EnumType.STRING)
 	private StatusEntrega status;
 	
-	private LocalDateTime data_pedido;
-	private LocalDateTime data_finalizacao;
+	private OffsetDateTime data_pedido;
+	private OffsetDateTime data_finalizacao;
+	
+	public Entrega(EntregaDto entregaDto, Cliente cliente) {
+		this.cliente = cliente;
+		this.destinatario = entregaDto.destinatario();
+		this.taxa = entregaDto.taxa();
+		this.status = StatusEntrega.PENDENTE;
+		this.data_pedido = OffsetDateTime.now();
+	}
 }

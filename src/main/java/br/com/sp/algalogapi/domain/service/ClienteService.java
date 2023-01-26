@@ -20,8 +20,6 @@ public class ClienteService {
 	@Autowired
 	private ClienteRepository repository;
 	
-	
-
 	public Page<ReturnClienteDto> listarClientes(@PageableDefault() Pageable paginacao) {
 		var page = repository.findAll(paginacao).map(ReturnClienteDto::new);
 		return page;
