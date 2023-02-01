@@ -7,7 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import br.com.sp.algalogapi.api.dto.ClienteDto;
+import br.com.sp.algalogapi.api.dto.input.ClienteDto;
 import br.com.sp.algalogapi.domain.ValidationGroup;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -31,10 +31,4 @@ public class Cliente {
 	private String nome;
 	private String email;
 	private String telefone;
-	
-	public Cliente(ClienteDto clienteDto) {
-		this.nome = clienteDto.nome();
-		this.email = clienteDto.email();
-		this.telefone = clienteDto.telefone();
-	}
 }

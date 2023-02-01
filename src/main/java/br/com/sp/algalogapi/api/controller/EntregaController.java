@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sp.algalogapi.api.dto.EntregaDto;
-import br.com.sp.algalogapi.api.dto.ReturnEntregaDto;
+import br.com.sp.algalogapi.api.dto.input.EntregaDto;
+import br.com.sp.algalogapi.api.dto.output.ReturnEntregaDto;
 import br.com.sp.algalogapi.domain.model.Entrega;
 import br.com.sp.algalogapi.domain.service.SolicitacaoEntregaService;
 import lombok.AllArgsConstructor;
@@ -40,7 +40,7 @@ public class EntregaController {
 	
 	@PostMapping
 	@ResponseStatus(value = HttpStatus.CREATED)
-	public Entrega cadastrarEntrega(@Valid @RequestBody EntregaDto entrega) {
+	public ReturnEntregaDto cadastrarEntrega(@Valid @RequestBody EntregaDto entrega) {
 		return service.cadastrarEntrega(entrega);
 	}
 	

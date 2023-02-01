@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.com.sp.algalogapi.api.dto.ClienteDto;
-import br.com.sp.algalogapi.api.dto.ReturnClienteDto;
+import br.com.sp.algalogapi.api.dto.input.ClienteDto;
+import br.com.sp.algalogapi.api.dto.output.ReturnClienteDto;
 import br.com.sp.algalogapi.domain.service.ClienteService;
 
 @RestController
@@ -34,7 +34,7 @@ public class ClienteController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<ClienteDto> listarCliente(@PathVariable Long id) {
+	public ResponseEntity<ReturnClienteDto> listarCliente(@PathVariable Long id) {
 		return clienteService.listarCliente(id);
 	}
 

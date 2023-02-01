@@ -1,5 +1,6 @@
 package br.com.sp.algalogapi.api.exception;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,6 +48,17 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	@ExceptionHandler(NegocioException.class)
 	public ResponseEntity<Object> handleNegocioException(NegocioException ex, WebRequest request){
 		HttpStatus status = HttpStatus.BAD_REQUEST;
+		
+		ErroBody erroBody = new ErroBody();
+		erroBody.prepararResposta(status, ex);
+		
+		return handleExceptionInternal(ex, erroBody, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+	public ResponseEntity<Object> handleSQLIntegrity(SQLIntegrityConstraintViolationException ex, 
+			WebRequest request){
+		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 		
 		ErroBody erroBody = new ErroBody();
 		erroBody.prepararResposta(status, ex);

@@ -16,7 +16,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
-import br.com.sp.algalogapi.api.dto.EntregaDto;
+import br.com.sp.algalogapi.api.dto.input.DestinatarioModel;
+import br.com.sp.algalogapi.api.dto.input.EntregaDto;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -44,16 +45,9 @@ public class Entrega {
 	private BigDecimal taxa;
 	
 	@Enumerated(EnumType.STRING)
-	private StatusEntrega status;
+	private StatusEntrega status = StatusEntrega.PENDENTE;
 	
-	private OffsetDateTime data_pedido;
+	private OffsetDateTime data_pedido = OffsetDateTime.now();
 	private OffsetDateTime data_finalizacao;
 	
-	public Entrega(EntregaDto entregaDto, Cliente cliente) {
-		this.cliente = cliente;
-		this.destinatario = entregaDto.destinatario();
-		this.taxa = entregaDto.taxa();
-		this.status = StatusEntrega.PENDENTE;
-		this.data_pedido = OffsetDateTime.now();
-	}
 }
