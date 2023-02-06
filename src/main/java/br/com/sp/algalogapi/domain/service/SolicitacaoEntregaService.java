@@ -1,7 +1,5 @@
 package br.com.sp.algalogapi.domain.service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -23,6 +21,7 @@ public class SolicitacaoEntregaService {
 	
 	private ClienteService clienteService;
 	private EntregaRepository repository;
+	private BuscaEntidadeService buscaEntidadeService;
 	private ModelMapperService modelMapper;
 	
 	
@@ -44,9 +43,19 @@ public class SolicitacaoEntregaService {
 		repository.save(entrega);
 		
 		ReturnEntregaDto returnEntrega = modelMapper.toReturnEntregaDto(entrega);
-		returnEntrega.setCliente(cliente);
+		returnEntrega.setCliente(modelMapper.toReturnClienteDto(cliente));
 		
 		return returnEntrega;
+	}
+	
+	@Transactional
+	public ResponseEntity<Void> finalizarEntrega(Long id) {
+		Entrega entrega = buscaEntidadeService.retornarEntrega(id);
+		entrega.finalizar();
+		repository.save(entrega);
+		
+		return ResponseEntity.noContent().build();
+		
 	}
 
 	

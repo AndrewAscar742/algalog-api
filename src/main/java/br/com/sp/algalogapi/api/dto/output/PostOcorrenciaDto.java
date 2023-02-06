@@ -11,11 +11,8 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ReturnClienteDto{
-	
-	private Long id; 
-	private String nome; 
-	private String email; 
-	private String telefone; 
-	private OffsetDateTime data_requisicao = OffsetDateTime.now();
+public class PostOcorrenciaDto {
+	private Long id;
+	private String descricao;
+	private OffsetDateTime dataRegistro;
 }

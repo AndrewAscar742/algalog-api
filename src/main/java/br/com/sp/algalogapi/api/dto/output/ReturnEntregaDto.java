@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 import java.time.OffsetDateTime;
 
 import br.com.sp.algalogapi.api.dto.input.DestinatarioModel;
-import br.com.sp.algalogapi.domain.model.Cliente;
 import br.com.sp.algalogapi.domain.model.StatusEntrega;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,7 +17,7 @@ import lombok.Setter;
 public class ReturnEntregaDto{
 	
 	private Long id;
-	private Cliente cliente; 
+	private ReturnClienteDto cliente; 
 	private DestinatarioModel destinatario; 
 	private BigDecimal taxa; 
 	private StatusEntrega status;

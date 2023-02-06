@@ -15,7 +15,7 @@ import io.swagger.v3.oas.annotations.info.License;
 		version = "2.7.8",
 		termsOfService = "Termo de uso: OpenSource",
 		license = @License(name = "Github: AndrewAscar742", 
-			url = "http://localhost:8080/{recurso}"),
+			url = "http://github.com/AndrewAscar742"),
 		contact = @Contact(name = "Andrew Matos Ascar", 
 			email = "andrewmatosascar@outlook.com")))
 public class AlgalogApiApplication {

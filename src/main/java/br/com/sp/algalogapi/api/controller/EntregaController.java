@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.sp.algalogapi.api.dto.input.EntregaDto;
 import br.com.sp.algalogapi.api.dto.output.ReturnEntregaDto;
-import br.com.sp.algalogapi.domain.model.Entrega;
 import br.com.sp.algalogapi.domain.service.SolicitacaoEntregaService;
 import lombok.AllArgsConstructor;
 
@@ -42,6 +42,11 @@ public class EntregaController {
 	@ResponseStatus(value = HttpStatus.CREATED)
 	public ReturnEntregaDto cadastrarEntrega(@Valid @RequestBody EntregaDto entrega) {
 		return service.cadastrarEntrega(entrega);
+	}
+	
+	@PutMapping("/{id}/finalizacao")
+	public ResponseEntity<Void> finalizarEntrega(@PathVariable Long id) {
+		return service.finalizarEntrega(id);
 	}
 	
 	

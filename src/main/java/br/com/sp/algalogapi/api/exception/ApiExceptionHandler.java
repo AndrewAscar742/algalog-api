@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import br.com.sp.algalogapi.domain.exception.EntidadeNaoEncontradaException;
 import br.com.sp.algalogapi.domain.exception.NegocioException;
 
 @ControllerAdvice //ela vai tratar todas as requisições do controller
@@ -59,6 +60,16 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler{
 	public ResponseEntity<Object> handleSQLIntegrity(SQLIntegrityConstraintViolationException ex, 
 			WebRequest request){
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
+		
+		ErroBody erroBody = new ErroBody();
+		erroBody.prepararResposta(status, ex);
+		
+		return handleExceptionInternal(ex, erroBody, new HttpHeaders(), status, request);
+	}
+	
+	@ExceptionHandler(EntidadeNaoEncontradaException.class)
+	public ResponseEntity<Object> handleNegocioException(EntidadeNaoEncontradaException ex, WebRequest request){
+		HttpStatus status = HttpStatus.NOT_FOUND;
 		
 		ErroBody erroBody = new ErroBody();
 		erroBody.prepararResposta(status, ex);
