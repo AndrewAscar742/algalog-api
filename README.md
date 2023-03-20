@@ -23,7 +23,7 @@ DDD (Domain Drive Design), ISO 8601, ModelMapper e Git
 Clone o projeto
 
 ```bash
-  git clone https://link-para-o-projeto
+  git clone https://github.com/AndrewAscar742/algalog-api.git
 ```
 
 Importe o projeto para sua IDE que contenha o STS
